@@ -1,10 +1,13 @@
 package com.cognizant.entity;
 
-import java.util.Date;
+
+
+import java.sql.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Component
 @Entity
@@ -30,7 +36,8 @@ public class ScheduleTraining {
 	@Column(name="DURATION")
 	int duration;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="TRAINER_ID")
 	private TrainerInfo trainerInfo;
 	

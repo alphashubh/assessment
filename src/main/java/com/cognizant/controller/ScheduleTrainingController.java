@@ -2,9 +2,7 @@ package com.cognizant.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Set;
+
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -46,8 +44,8 @@ public class ScheduleTrainingController {
 			BindingResult result, Model model) throws ParseException {
 		
 		TrainerInfo inputtrainerInfo=schedule.getTrainerInfo();
-		
 		ScheduleTraining sTraining=schedule.getScheduleTraining();
+		System.out.println("00000000000000000"+sTraining.getStartDate());
 		scheduleTrainingService.insertScheduleTraining(sTraining,inputtrainerInfo);
 		if(result.hasErrors()){
 			return "error";

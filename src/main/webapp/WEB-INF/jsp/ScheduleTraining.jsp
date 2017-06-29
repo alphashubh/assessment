@@ -91,7 +91,7 @@ button:hover {
     <tr>
     	
         <td >Start Date:</td>
-        <td><form:input path="scheduleTraining.startDate"  placeholder="startDate" maxlength="30" ng-model="startDate"
+        <td><form:input path="scheduleTraining.startDate" type="date" placeholder="startDate" maxlength="30" ng-model="startDate"
         required="true" /></td>
      
     </tr>

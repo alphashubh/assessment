@@ -2,10 +2,10 @@ package com.cog.test;
 
 import static org.junit.Assert.*;
 
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +27,7 @@ public class ScheduleTrainingTest {
 	TrainerInfo trainerInfo;
 	
 
-	//@Test
+	@Test
 	public void insertTrainerInfo(){
 		TrainerInfo trainerInfo=new TrainerInfo(123458,"Sunil","SRM Unversity","Spring");
 		System.out.println("in test"+trainerInfo);
@@ -49,18 +49,19 @@ public class ScheduleTrainingTest {
 	//@Test
 	public void insertScheduleTraining() throws ParseException{
 		TrainerInfo inputtrainerInfo=new TrainerInfo(123455,"ramesh","SRM Unversity","hibernate");
-		String date1="28/07/2017";
-		Date date=new SimpleDateFormat("dd/MM/yyyy").parse(date1);
-		System.out.println("****************"+date);
-		ScheduleTraining sTraining=new ScheduleTraining(8,date,40);
+		
+		Date date=new Date(2017,06,28);
+	
+		//Date date=new SimpleDateFormat("dd/MM/yyyy").parse(date1);
+		System.out.println("**************** test"+date);
+		ScheduleTraining sTraining=new ScheduleTraining(888,date,40);
 		scheduleTrainingService.insertScheduleTraining(sTraining,inputtrainerInfo);
 		
 	}
 	
 	@Test
 	public void retriveSchedule() throws ParseException{
-		String date1="30/06/2017";
-		Date date=new SimpleDateFormat("dd/MM/yyyy").parse(date1);
+		Date date=new Date(2017,06,28);
 		scheduleTrainingService.retriveSchedule(date);
 	}
 

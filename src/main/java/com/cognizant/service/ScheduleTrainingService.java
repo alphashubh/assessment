@@ -1,10 +1,10 @@
 package com.cognizant.service;
 
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +18,7 @@ import com.cognizant.entity.TrainerInfo;
 public class ScheduleTrainingService {
 	
 	@Autowired
+	
 	ScheduleTrainingDAO scheduleTrainingDAO;
 	TrainerInfo trainerInfo;
 	public void insertTrainerInfo(TrainerInfo trainerInfo) {
@@ -31,16 +32,15 @@ public class ScheduleTrainingService {
 		int id=inputtrainerInfo.getTrainerId();
 		TrainerInfo trainerInfo=scheduleTrainingDAO.insertScheduleTraining(id);
 		System.out.println("gggggggggggggggggg"+trainerInfo);
-		DateFormat dateFormat=new SimpleDateFormat("dd/MM/yyyy");
-		Date date=new Date();
-		String date1=dateFormat.format(date);
-		Date currentDate= new SimpleDateFormat("dd/MM/yyyy").parse(date1);
-		Date inputDate=new SimpleDateFormat("dd/MM/yyyy").parse(dateFormat.format(sTraining.getStartDate()));
-		System.out.println("++++++++++++++++"+currentDate+"+++++++"+inputDate);
-		
+		java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis()); 
+		System.out.println("dateeeeeeeeee"+sTraining.getStartDate());
+		Date inputDate=(Date) sTraining.getStartDate();
+		//Date inputDate=new SimpleDateFormat("dd/MM/yyyy").parse(dateFormat.format(sTraining.getStartDate()));
+		System.out.println("++++++++++++++++"+currentDate+"+++++++"+inputDate+"+++++++++");
+		System.out.println("*************============**********"+inputDate.compareTo(currentDate));
 		if(trainerInfo!=null){
 			
-			if(inputDate.after(currentDate)){
+			if(!inputDate.before(currentDate) || inputDate.compareTo(currentDate)==-1){
 			System.out.println("******************************");
 			sTraining.setTrainerInfo(trainerInfo); 
 			System.out.println("List******"+inputtrainerInfo);
@@ -55,7 +55,7 @@ public class ScheduleTrainingService {
 			}
 		}
 		else{
-			if(inputDate.after(currentDate)){
+			if(!inputDate.before(currentDate) || inputDate.compareTo(currentDate)==-1){
 			System.out.println("TrainerId not existed*******************************");
 			
 			scheduleTrainingDAO.insertboth(sTraining, inputtrainerInfo);
@@ -79,9 +79,12 @@ public class ScheduleTrainingService {
 		
 	}
 
-	public void retriveSchedule(Date date) throws ParseException {
+	public  List<ScheduleTraining> retriveSchedule(Date date) throws ParseException {
 		
 		scheduleTrainingDAO.retriveSchedule(date);
+		List <ScheduleTraining> ls=scheduleTrainingDAO.retriveSchedule(date);
+		System.out.println("9090909909090909009909090909090909009090909090990990"+ls);
+		return ls;
 	}
 
 }

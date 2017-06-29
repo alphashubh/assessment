@@ -143,12 +143,15 @@ input:hover {
 						Home Loan</a>
 				</button></td>
 			</tr>
-			tr>
+			<tr>
 				<td><button>
 					<a
 						href="scheduletraining">Schedule Training</a>
 				</button></td>
-				
+				<td><button>
+					<a
+						href="viewschedule">View Schedule Training</a>
+				</button></td>
 			</tr>
 		</table>
 	
